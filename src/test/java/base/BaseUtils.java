@@ -10,6 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -31,17 +32,10 @@ public final class BaseUtils {
                 chromeOptions.addArguments(argument);
             }
         }
-        HashMap<String, Object> chromePreferences = new HashMap<String, Object>();
-        chromePreferences.put("profile.default_content_settings.popups", 0);
-        chromePreferences.put("plugins.always_open_pdf_externally", "true");
-        chromePreferences.put("download.prompt_for_download", "false");
-      //  chromePreferences.put("download.default_directory", downloadFilepath);
-        chromeOptions.setExperimentalOption("prefs", chromePreferences);
+        chromeOptions.setExperimentalOption("excludeSwitches", Arrays.asList("test-type"));
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("browserName", "chrome");
-        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-//        DesiredCapabilities capabilities = new DesiredCapabilities();
         chromeOptions.merge(capabilities);
         WebDriverManager.chromedriver().setup();
     }
