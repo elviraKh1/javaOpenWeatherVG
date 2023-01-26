@@ -200,8 +200,9 @@ public abstract class BasePage {
         Reporter.log("%%%%%%%%%%%%%%%%%%%%%originalWindow="+originalWindow,true);
         for (String windowHandle : getDriver().getWindowHandles()) {
             if (!originalWindow.equals(windowHandle) && getDriver().getWindowHandles().size() == 2) {
-                Reporter.log("%%%%%%%%%%%%%%%%%%%%%windowHandle="+getDriver().getPageSource(),true);
+                Reporter.log("%%%%%%%%%%%%%%%%%%%%%windowHandle="+getDriver().getPageSource().substring(0,10),true);
                 getDriver().switchTo().window(windowHandle);
+                Reporter.log("%%%%%%%%%%%%%%%%%%%%%windowHandle="+getDriver().getPageSource().substring(0,10),true);
                 break;
             }
         }
