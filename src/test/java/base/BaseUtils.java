@@ -1,14 +1,16 @@
 package base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Properties;
 
 public final class BaseUtils {
@@ -24,13 +26,23 @@ public final class BaseUtils {
 
         chromeOptions = new ChromeOptions();
         String options = properties.getProperty(PROP_CHROME_OPTIONS);
-        chromeOptions.addArguments("--no-sandbox");
         if (options != null) {
             for (String argument : options.split(";")) {
                 chromeOptions.addArguments(argument);
             }
         }
-
+        HashMap<String, Object> chromePreferences = new HashMap<String, Object>();
+        chromePreferences.put("profile.default_content_settings.popups", 0);
+        chromePreferences.put("plugins.always_open_pdf_externally", "true");
+        chromePreferences.put("download.prompt_for_download", "false");
+      //  chromePreferences.put("download.default_directory", downloadFilepath);
+        chromeOptions.setExperimentalOption("prefs", chromePreferences);
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("browserName", "chrome");
+        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+        chromeOptions.merge(capabilities);
         WebDriverManager.chromedriver().setup();
     }
 
