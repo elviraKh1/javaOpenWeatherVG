@@ -1,6 +1,7 @@
 package base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -23,6 +24,7 @@ public final class BaseUtils {
 
         chromeOptions = new ChromeOptions();
         String options = properties.getProperty(PROP_CHROME_OPTIONS);
+        chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
         if (options != null) {
             for (String argument : options.split(";")) {
                 chromeOptions.addArguments(argument);
