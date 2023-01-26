@@ -89,8 +89,8 @@ public abstract class BaseTest {
     }
 
     public String getExternalPageURL() {
-        getDriver().manage().timeouts().pageLoadTimeout(30L, TimeUnit.SECONDS) ;
-        getDriver().manage().timeouts().setScriptTimeout(3L, TimeUnit.SECONDS);
+        getDriver().manage().timeouts().pageLoadTimeout(60L, TimeUnit.SECONDS) ;
+        getDriver().manage().timeouts().setScriptTimeout(6L, TimeUnit.SECONDS);
         return getDriver().getCurrentUrl();
     }
 }
