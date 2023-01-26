@@ -3,46 +3,28 @@ package tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.MainPage;
+import pages.TestData;
 import pages.home.HomeUsersSignUpPage;
 
 public class HomeSignUpTest extends BaseTest {
 
-    @Test
-    public void testErrorMessageWhenCreatingNewAccountWithoutCaptcha() {
-        final String expectedReCaptchaErrorMessage = "reCAPTCHA verification failed, please try again.";
+    @Test(dataProvider = "SignUpGroupMenuData",dataProviderClass = TestData.class)
+    public void testSignUpGroupLinksNavigateToCorrespondingPage(
+            int index, String name, String href, String expectedURL, String expectedTitle) {
 
-        String actualReCaptchaErrorMessage = openBaseURL()
+        MainPage mainPage = openBaseURL();
+
+        final String oldURL = mainPage.getCurrentURL();
+
+        mainPage
                 .clickSignInMenu()
                 .clickCreateAnAccountLink()
-                .clickClearInputNewUsername()
-                .clickClearInputNewUserEmail()
-                .clickClearInputNewUserPassword()
-                .clickClearInputRepeatPassword()
-                .clickAgeConfirmCheckbox()
-                .clickAgreementCheckbox()
-                .clickCreateAccountButton()
-                .getErrorCaptchaMessage();
+                .clickSignUpGroupLinks(index);
 
-        Assert.assertEquals(actualReCaptchaErrorMessage, expectedReCaptchaErrorMessage);
-    }
+        String actualURL = getExternalPageURL();
 
-    @Test
-    public void testPrivacyPolicySignUpLinkNavigatesToPrivacyPolicyPage() {
-        final String expectedURL = "https://openweather.co.uk/privacy-policy";
-        final String expectedTitle = "Privacy policy - OpenWeatherMap";
-
-        final String oldURL = openBaseURL()
-                .clickSignInMenu()
-                .clickCreateAnAccountLink()
-                .getCurrentURL();
-
-        HomeUsersSignUpPage homeUsersSignUpPage = new HomeUsersSignUpPage(getDriver());
-
-        homeUsersSignUpPage.clickPrivacyPolicy();
-        homeUsersSignUpPage.switchToExternalPage();
-
-        Assert.assertNotEquals(getExternalPageURL(), oldURL);
-        Assert.assertEquals(getExternalPageURL(), expectedURL);
-        Assert.assertEquals(getExternalPageTitle(), expectedTitle);
+        Assert.assertNotEquals(oldURL, actualURL);
+        Assert.assertEquals(actualURL, expectedURL);
     }
 }

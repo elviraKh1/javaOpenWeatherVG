@@ -3,7 +3,10 @@ package pages.home;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.FooterMenuPage;
+
+import java.util.List;
 
 public class HomeUsersSignUpPage extends FooterMenuPage<HomeUsersSignUpPage> {
 
@@ -39,6 +42,9 @@ public class HomeUsersSignUpPage extends FooterMenuPage<HomeUsersSignUpPage> {
 
     @FindBy(xpath = "//div[contains(text(),'Privacy Centre')]/a[.='Privacy Policy']")
     private WebElement privacyPolicy;
+
+    @FindBy(xpath =  "//div[@class = 'form-group']//a")
+    private List<WebElement> signUpGroupLinks;
 
     public HomeUsersSignUpPage(WebDriver driver) {
         super(driver);
@@ -109,5 +115,15 @@ public class HomeUsersSignUpPage extends FooterMenuPage<HomeUsersSignUpPage> {
 
     public void clickPrivacyPolicy() {
         click20(privacyPolicy);
+    }
+
+    public List<WebElement> signUpGroupLinks() {
+
+        return signUpGroupLinks;
+    }
+    public void clickSignUpGroupLinks(int index) {
+        click(signUpGroupLinks().get(index));
+        switchToAnotherWindow();
+        getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 }
