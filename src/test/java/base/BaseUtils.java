@@ -24,7 +24,7 @@ public final class BaseUtils {
 
         chromeOptions = new ChromeOptions();
         String options = properties.getProperty(PROP_CHROME_OPTIONS);
-        chromeOptions.options.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--no-sandbox");
         if (options != null) {
             for (String argument : options.split(";")) {
                 chromeOptions.addArguments(argument);

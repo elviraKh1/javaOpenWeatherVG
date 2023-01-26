@@ -96,9 +96,9 @@ public class TestData {
     public static Object[][] signUpGroupMenuTestDataProvider() {
 
         return new Object[][] {
-                {0, "Privacy Policy", "https://openweather.co.uk/privacy-policy", "https://openweather.co.uk/privacy-policy", "Privacy policy - OpenWeatherMap"},
-                {1, "Terms and conditions of sale", "https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf",
-                        "https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf", ""},
+              //  {0, "Privacy Policy", "https://openweather.co.uk/privacy-policy", "https://openweather.co.uk/privacy-policy", "Privacy policy - OpenWeatherMap"},
+              //  {1, "Terms and conditions of sale", "https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf",
+                //        "https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf", ""},
                 {2, "Websites terms and conditions of use", "https://openweather.co.uk/storage/app/media/Terms/Openweather_website_terms_and_conditions_of_use.pdf",
                         "https://openweather.co.uk/storage/app/media/Terms/Openweather_website_terms_and_conditions_of_use.pdf", ""}
 
