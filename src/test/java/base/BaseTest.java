@@ -14,6 +14,7 @@ import utils.TestUtils;
 
 import java.lang.reflect.Method;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
 
@@ -88,7 +89,8 @@ public abstract class BaseTest {
     }
 
     public String getExternalPageURL() {
-
+        getDriver().manage().timeouts().pageLoadTimeout(30L, TimeUnit.SECONDS) ;
+        getDriver().manage().timeouts().setScriptTimeout(3L, TimeUnit.SECONDS);
         return getDriver().getCurrentUrl();
     }
 }
