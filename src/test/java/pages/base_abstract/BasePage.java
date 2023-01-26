@@ -197,9 +197,10 @@ public abstract class BasePage {
 
     protected void switchToAnotherWindow() {
         String originalWindow = getDriver().getWindowHandle();
-
+        Reporter.log("%%%%%%%%%%%%%%%%%%%%%originalWindow="+originalWindow,true);
         for (String windowHandle : getDriver().getWindowHandles()) {
             if (!originalWindow.equals(windowHandle) && getDriver().getWindowHandles().size() == 2) {
+                Reporter.log("%%%%%%%%%%%%%%%%%%%%%windowHandle="+getDriver().getPageSource(),true);
                 getDriver().switchTo().window(windowHandle);
                 break;
             }

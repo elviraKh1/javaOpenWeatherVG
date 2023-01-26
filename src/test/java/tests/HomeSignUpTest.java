@@ -17,7 +17,7 @@ public class HomeSignUpTest extends BaseTest {
         MainPage mainPage = openBaseURL();
 
         final String oldURL = mainPage.getCurrentURL();
-
+        Reporter.log("%%%%%%%%%%%%%%%%%%%%%1="+oldURL,true);
         mainPage
                 .clickSignInMenu()
                 .clickCreateAnAccountLink()
