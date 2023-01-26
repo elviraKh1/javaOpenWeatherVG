@@ -23,6 +23,9 @@ public class TestUtils {
         waitForPageLoaded(driver);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(ON_LOAD_CONTAINER));
     }
+    public static void loadGmailUrlPage(WebDriver driver, WebDriverWait wait) {
+        driver.get(BaseTest.getBaseUrl());
+    }
 
     public static void waitForPageLoaded(WebDriver driver) {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(25));

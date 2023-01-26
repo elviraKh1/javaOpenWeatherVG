@@ -4,10 +4,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Properties;
 
 public final class BaseUtils {
@@ -28,7 +32,11 @@ public final class BaseUtils {
                 chromeOptions.addArguments(argument);
             }
         }
-
+        chromeOptions.setExperimentalOption("excludeSwitches", Arrays.asList("test-type"));
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("browserName", "chrome");
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        chromeOptions.merge(capabilities);
         WebDriverManager.chromedriver().setup();
     }
 
