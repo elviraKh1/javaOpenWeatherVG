@@ -36,6 +36,7 @@ public class HomeSignUpTest extends BaseTest {
 ////        Assert.assertNotEquals(oldURL, actualURL);
 ////        Assert.assertEquals(actualURL, expectedTitletedURL);
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("headless");
         chromeOptions.setExperimentalOption("excludeSwitches", Arrays.asList("test-type"));
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("browserName", "chrome");
@@ -46,5 +47,6 @@ public class HomeSignUpTest extends BaseTest {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf");
         System.out.println("Page getCurrentUrl: " + driver.getCurrentUrl());
+        driver.close();
     }
 }
