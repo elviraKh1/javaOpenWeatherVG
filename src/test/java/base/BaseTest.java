@@ -1,5 +1,8 @@
 package base;
 
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
@@ -44,10 +47,18 @@ public abstract class BaseTest {
 
     @AfterMethod
     protected void afterMethod(Method method, ITestResult result) {
+        if (!result.isSuccess()) {
+            BaseUtils.captureScreenFile(driver, method.getName(), this.getClass().getName());
+            takeScreenshot();
+        }
         Reporter.log(ReportUtils.getTestStatistics(method, result), true);
 
         driver.quit();
         webDriverWait = null;
+    }
+    @Attachment
+    public byte[] takeScreenshot() {
+        return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
     protected WebDriver getDriver() {

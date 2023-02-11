@@ -1,11 +1,16 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
+import io.qameta.allure.Link;
+import io.qameta.allure.Owner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.TestData;
 import pages.home.HomePage;
 import pages.home.HomeUsersSignInPage;
+
+import static io.qameta.allure.Allure.step;
 
 public class HomeUsersSignInTest extends BaseTest {
 
@@ -69,8 +74,12 @@ public class HomeUsersSignInTest extends BaseTest {
         Assert.assertEquals(actualSignInMenuText, expectedSignInMenuText);
     }
 
+    @Owner("Elvira")
+    @Link("https://artoftesting.com/login")
+    @Description("Allure report description: testing Login form with different parameters:")
     @Test(dataProvider = "SignInCredentials", dataProviderClass = TestData.class)
     public void testSignInWithInvalidCredentials(String scenario, String userEmail, String userPassword, String expectedNoticeMessage, String expectedSignInMenuText) {
+        step("Login ");
 
         final String oldSignInMenuText = openBaseURL()
                 .clickSignInMenu()
@@ -78,14 +87,17 @@ public class HomeUsersSignInTest extends BaseTest {
 
         HomeUsersSignInPage homeUsersSignInPage = new HomeUsersSignInPage(getDriver());
 
+        step("Enter data ");
         homeUsersSignInPage
                 .clickClearInputRegularUserEmail(userEmail)
                 .clickClearInputRegularUserPassword(userPassword)
                 .clickSubmitButton();
 
+        step("Get notification ");
         String actualNoticeMessage = homeUsersSignInPage.getNotification();
         String actualSignInMenuText = homeUsersSignInPage.getSignInText();
 
+        step("Asserts ");
         Assert.assertEquals(actualNoticeMessage, expectedNoticeMessage);
         Assert.assertEquals(actualSignInMenuText, oldSignInMenuText);
         Assert.assertEquals(actualSignInMenuText, expectedSignInMenuText);
