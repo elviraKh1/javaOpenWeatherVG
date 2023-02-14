@@ -1,6 +1,7 @@
 package base;
 
 import io.qameta.allure.Attachment;
+import io.qameta.allure.Feature;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -56,6 +57,7 @@ public abstract class BaseTest {
         driver.quit();
         webDriverWait = null;
     }
+    @Feature("A  Screenshot presents when test fails")
     @Attachment
     public byte[] takeScreenshot() {
         return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);

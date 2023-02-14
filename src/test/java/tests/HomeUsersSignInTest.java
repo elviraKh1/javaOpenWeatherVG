@@ -1,9 +1,7 @@
 package tests;
 
 import base.BaseTest;
-import io.qameta.allure.Description;
-import io.qameta.allure.Link;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.TestData;
@@ -11,7 +9,7 @@ import pages.home.HomePage;
 import pages.home.HomeUsersSignInPage;
 
 import static io.qameta.allure.Allure.step;
-
+@Epic("Tests with sign in method on the sign page - epic is a biggest idea")
 public class HomeUsersSignInTest extends BaseTest {
 
     @Test
@@ -73,6 +71,7 @@ public class HomeUsersSignInTest extends BaseTest {
         Assert.assertEquals(actualSignInMenuText, oldSignInMenuText);
         Assert.assertEquals(actualSignInMenuText, expectedSignInMenuText);
     }
+
 
     @Owner("Elvira")
     @Link("https://artoftesting.com/login")
