@@ -4,6 +4,7 @@ import api.ApiHelpers;
 import api.CaptureNetworkTraffic;
 import api.model.Current;
 import base.BaseTest;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.json.JSONArray;
@@ -168,6 +169,7 @@ public class API_MainTest extends BaseTest {
     @Test
     public void test_API_RAResponse_WhenSearchingCityCountry() {
         Current obj = given()
+                .filter(new AllureRestAssured())
                 .when()
                 .contentType(ContentType.JSON)
                 .get(PARIS_URL_ONECALL)
@@ -196,6 +198,7 @@ public class API_MainTest extends BaseTest {
         final String cityName = "Paris";
 
         final Response response = given()
+                .filter(new AllureRestAssured())
                 .when()
                 .contentType(ContentType.JSON)
                 .get(PARIS_URL_ONECALL)
