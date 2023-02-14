@@ -115,7 +115,7 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar"
                     </argLine>
                     <systemPropertyVariables>
-                        <allure.results.directory>target\allure-results</allure.results.directory>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
                 </configuration>
                 <dependencies>
@@ -133,9 +133,10 @@
                 <version>${allure-maven.version}</version>
                 <configuration>
                     <reportVersion>${allure-testng.version}</reportVersion>
-                    <allureDownloadUrl>
+                    <!--allureDownloadUrl>
                         ${allure.cmd.download.url}/${allure-testng.version}/allure-commandline-${allure-testng.version}.zip
-                    </allureDownloadUrl>
+                    </allureDownloadUrl-->
+                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
                 </configuration>
             </plugin>
             <!--plugin>
