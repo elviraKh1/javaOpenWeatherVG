@@ -17,10 +17,12 @@
         <aspectjweaver.version>1.9.19</aspectjweaver.version>
         <allure-testng.version>2.20.1</allure-testng.version>
         <allure-maven.version>2.12.0</allure-maven.version>
-        <allure.cmd.download.url>
-            https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
-        </allure.cmd.download.url>
+<!--        <allure.cmd.download.url>-->
+<!--            https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline-->
+<!--        </allure.cmd.download.url>-->
         <maven.resources-plugin.version>3.3.0</maven.resources-plugin.version>
+
+<!--        <buildDir>${project.build.directory}</buildDir>-->
     </properties>
 
     <dependencies>
@@ -114,9 +116,12 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar"
                     </argLine>
-                    <systemPropertyVariables>
-                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-                    </systemPropertyVariables>
+<!--                    <systemPropertyVariables>-->
+<!--                        <allure.results.directory>target/allure-results</allure.results.directory>-->
+<!--                    </systemPropertyVariables>-->
+<!--                    <systemPropertyVariables>-->
+<!--                        <allure.results.directory>target/allure-results</allure.results.directory>-->
+<!--                    </systemPropertyVariables>-->
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -133,10 +138,15 @@
                 <version>${allure-maven.version}</version>
                 <configuration>
                     <reportVersion>${allure-testng.version}</reportVersion>
+                    <!--reportDirectory>${basedir}/allure-report</reportDirectory-->
                     <!--allureDownloadUrl>
                         ${allure.cmd.download.url}/${allure-testng.version}/allure-commandline-${allure-testng.version}.zip
                     </allureDownloadUrl-->
-                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+<!--                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>-->
+
+<!--                        <outputDirectory>${basedir}/target/allure-reports/</outputDirectory>-->
+<!--                        <resultsDirectory>${basedir}/target/allure-results</resultsDirectory>-->
+
                 </configuration>
             </plugin>
             <!--plugin>
