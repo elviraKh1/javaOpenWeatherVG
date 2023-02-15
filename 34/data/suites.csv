@@ -1,0 +1,3 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Feb 15 20:46:30 GMT 2023","Wed Feb 15 20:46:44 GMT 2023","14386","Surefire suite","Surefire test","tests.HomeSignUpTest","tests.HomeSignUpTest","testPrivacyPolicySignUpLinkNavigatesToPrivacyPolicyPage","testPrivacyPolicySignUpLinkNavigatesToPrivacyPolicyPage",""
+"passed","Wed Feb 15 20:46:15 GMT 2023","Wed Feb 15 20:46:29 GMT 2023","13886","Surefire suite","Surefire test","tests.HomeSignUpTest","tests.HomeSignUpTest","testErrorMessageWhenCreatingNewAccountWithoutCaptcha","testErrorMessageWhenCreatingNewAccountWithoutCaptcha",""
