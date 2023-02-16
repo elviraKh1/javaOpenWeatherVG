@@ -49,7 +49,7 @@ public abstract class BaseTest {
     @AfterMethod
     protected void afterMethod(Method method, ITestResult result) {
         if (!result.isSuccess()) {
-           // BaseUtils.captureScreenFile(driver, method.getName(), this.getClass().getName());
+           BaseUtils.captureScreenFile(driver, method.getName(), this.getClass().getName());
             takeScreenshot();
         }
         Reporter.log(ReportUtils.getTestStatistics(method, result), true);
