@@ -46,7 +46,7 @@ public abstract class BaseTest {
         Reporter.log(ReportUtils.getClassNameTestName(method, result), true);
     }
     @Attachment
-    public byte[] saveFailureScreenShot(WebDriver driver) {
+    public byte[] takeScreenshot(WebDriver driver) {
         return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     }
 
