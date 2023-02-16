@@ -1,6 +1,7 @@
 package base;
 
 import io.qameta.allure.Attachment;
+import io.qameta.allure.Feature;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +18,6 @@ import utils.TestUtils;
 
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
 
@@ -45,26 +45,22 @@ public abstract class BaseTest {
         Reporter.log("TEST RUN", true);
         Reporter.log(ReportUtils.getClassNameTestName(method, result), true);
     }
-    @Attachment
-    public byte[] takeScreenshot(WebDriver driver) {
-        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
-    }
 
-    public void onTestFailure(ITestResult iTestResult) {
-        System.out.println("I am in onTestFailure method " + (iTestResult) + " failed");
-//        WebDriver driver = BaseClass.getDriver();
-//        // Allure ScreenShot and SaveTestLog
-//        if (driver instanceof WebDriver) {
-//            System.out.println("Screenshot captured for test case:" + getTestMethodName(iTestResult));
-//            saveFailureScreenShot(driver);
-//        }
-    }
     @AfterMethod
     protected void afterMethod(Method method, ITestResult result) {
+        if (!result.isSuccess()) {
+           // BaseUtils.captureScreenFile(driver, method.getName(), this.getClass().getName());
+            takeScreenshot();
+        }
         Reporter.log(ReportUtils.getTestStatistics(method, result), true);
 
         driver.quit();
         webDriverWait = null;
+    }
+    @Feature("A  Screenshot presents when test fails")
+    @Attachment
+    public byte[] takeScreenshot() {
+        return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
     protected WebDriver getDriver() {
@@ -105,6 +101,7 @@ public abstract class BaseTest {
     }
 
     public String getExternalPageURL() {
+
         return getDriver().getCurrentUrl();
     }
 }

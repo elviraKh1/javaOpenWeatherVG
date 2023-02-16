@@ -44,7 +44,7 @@ public class HomeUsersSignInTest extends BaseTest {
         Assert.assertEquals(actualNoticeMessage, expectedNoticeMessage);
         Assert.assertEquals(actualSignInMenuText, oldSignInMenuText);
         Assert.assertEquals(actualSignInMenuText, expectedSignInMenuText);
-        takeScreenshot(getDriver());
+        takeScreenshot();
     }
     @Attachment
     @Test
@@ -70,7 +70,7 @@ public class HomeUsersSignInTest extends BaseTest {
         Assert.assertEquals(actualNoticeMessage, expectedNoticeMessage);
         Assert.assertEquals(actualSignInMenuText, oldSignInMenuText);
         Assert.assertEquals(actualSignInMenuText, expectedSignInMenuText);
-        takeScreenshot(getDriver());
+        takeScreenshot();
     }
 
 
@@ -101,7 +101,6 @@ public class HomeUsersSignInTest extends BaseTest {
         Assert.assertEquals(actualNoticeMessage, expectedNoticeMessage);
         Assert.assertEquals(actualSignInMenuText, oldSignInMenuText);
         Assert.assertEquals(actualSignInMenuText, expectedSignInMenuText);
-        takeScreenshot(getDriver());
+        takeScreenshot();
     }
 }
-
