@@ -1,12 +1,14 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.TestData;
-import pages.home.HomePage;
 import pages.home.HomeUsersSignInPage;
 
+import static io.qameta.allure.Allure.step;
+@Epic("Tests with sign in method on the sign page - epic is a biggest idea")
 public class HomeUsersSignInTest extends BaseTest {
 
     @Test
@@ -42,8 +44,9 @@ public class HomeUsersSignInTest extends BaseTest {
         Assert.assertEquals(actualNoticeMessage, expectedNoticeMessage);
         Assert.assertEquals(actualSignInMenuText, oldSignInMenuText);
         Assert.assertEquals(actualSignInMenuText, expectedSignInMenuText);
+        takeScreenshot();
     }
-
+    @Attachment
     @Test
     public void testLogInWithPasswordIsCaseSensitive() {
         final String expectedNoticeMessage = "Invalid Email or password.";
@@ -67,10 +70,16 @@ public class HomeUsersSignInTest extends BaseTest {
         Assert.assertEquals(actualNoticeMessage, expectedNoticeMessage);
         Assert.assertEquals(actualSignInMenuText, oldSignInMenuText);
         Assert.assertEquals(actualSignInMenuText, expectedSignInMenuText);
+        takeScreenshot();
     }
 
+
+    @Owner("Elvira")
+    @Link("https://artoftesting.com/login")
+    @Description("Allure report description: testing Login form with different parameters:")
     @Test(dataProvider = "SignInCredentials", dataProviderClass = TestData.class)
     public void testSignInWithInvalidCredentials(String scenario, String userEmail, String userPassword, String expectedNoticeMessage, String expectedSignInMenuText) {
+        step("Login ");
 
         final String oldSignInMenuText = openBaseURL()
                 .clickSignInMenu()
@@ -78,17 +87,20 @@ public class HomeUsersSignInTest extends BaseTest {
 
         HomeUsersSignInPage homeUsersSignInPage = new HomeUsersSignInPage(getDriver());
 
+        step("Enter data ");
         homeUsersSignInPage
                 .clickClearInputRegularUserEmail(userEmail)
                 .clickClearInputRegularUserPassword(userPassword)
                 .clickSubmitButton();
 
+        step("Get notification ");
         String actualNoticeMessage = homeUsersSignInPage.getNotification();
         String actualSignInMenuText = homeUsersSignInPage.getSignInText();
 
+        step("Asserts ");
         Assert.assertEquals(actualNoticeMessage, expectedNoticeMessage);
         Assert.assertEquals(actualSignInMenuText, oldSignInMenuText);
         Assert.assertEquals(actualSignInMenuText, expectedSignInMenuText);
+        takeScreenshot();
     }
 }
-

@@ -1,13 +1,21 @@
 package base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Properties;
 
 public final class BaseUtils {
@@ -28,7 +36,11 @@ public final class BaseUtils {
                 chromeOptions.addArguments(argument);
             }
         }
-
+        chromeOptions.setExperimentalOption("excludeSwitches", Arrays.asList("test-type"));
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("browserName", "chrome");
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        chromeOptions.merge(capabilities);
         WebDriverManager.chromedriver().setup();
     }
 
@@ -65,5 +77,15 @@ public final class BaseUtils {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
         return driver;
+    }
+
+    static void captureScreenFile(WebDriver driver, String methodName, String className) {
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File file = ts.getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(file, new File(String.format("screenshots/%s-%s.png", className, methodName)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

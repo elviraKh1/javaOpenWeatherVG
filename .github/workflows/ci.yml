@@ -2,7 +2,7 @@ name: CI
 
 on:
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   run-test:
@@ -33,3 +33,45 @@ jobs:
         env:
           CHROME_OPTIONS: --disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless;--window-size=1920,1080
           CI_RUN: true
+
+
+
+
+      - name: Get Allure history
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Allure Report action
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
+        with:
+          allure_results: target/allure-results
+          #gh_pages: gh-pages
+          #allure_report: allure-report
+          allure_history: allure-history
+          keep_reports: 5
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
+
+#      - name: 'Hello World'
+#        description: 'Greet someone'
+#        inputs:
+#        who-to-greet: # id of input
+#          description: 'Who to greet'
+#          required: true
+#          default: 'World'
+#          outputs:
+#            random-number:
+#              description: "Random number"
+#              value: elvirakh1/javaOpenWetherVG@gh-pages
