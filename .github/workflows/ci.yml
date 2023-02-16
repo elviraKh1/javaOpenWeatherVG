@@ -2,7 +2,7 @@ name: CI
 
 on:
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   run-test:
@@ -62,3 +62,15 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
+
+      - name: 'Hello World'
+        description: 'Greet someone'
+        inputs:
+        who-to-greet: # id of input
+          description: 'Who to greet'
+          required: true
+          default: 'World'
+          outputs:
+            random-number:
+              description: "Random number"
+              value: elvirakh1/javaOpenWetherVG@gh-pages
